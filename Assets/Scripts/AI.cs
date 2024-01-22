@@ -27,7 +27,7 @@ public class AI : MonoBehaviour
         }
         else if (ball.transform.position.y < transform.position.y)
         {
-            transform.Translate(-(Vector2.up * moveDistance));
+            transform.Translate((Vector2.down * moveDistance));
         }
     }
 

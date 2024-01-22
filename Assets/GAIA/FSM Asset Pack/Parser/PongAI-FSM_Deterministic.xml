@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<FSM_Machine>
+    <FSMtype Probabilistic="NO">CLASSIC</FSMtype>
+    <FSMid>PongAIDeterministic</FSMid>
+    <Fsm>
+        <Callback>HandleEvents</Callback>
+        <States>
+            <State Initial="YES">
+                <S_Name>NOT_MOVING</S_Name>
+                <S_Action>NULL</S_Action>
+                <S_inAction>NULL</S_inAction>
+                <S_outAction>NULL</S_outAction>
+                <S_Fsm></S_Fsm>
+            </State>
+            <State Initial="NO">
+                <S_Name>MOVING_UP</S_Name>
+                <S_Action>MOVE_UP</S_Action>
+                <S_inAction>MOVE_UP</S_inAction>
+                <S_outAction>NULL</S_outAction>
+                <S_Fsm></S_Fsm>
+            </State>
+            <State Initial="NO">
+                <S_Name>MOVING_DOWN</S_Name>
+                <S_Action>MOVE_DOWN</S_Action>
+                <S_inAction>MOVE_DOWN</S_inAction>
+                <S_outAction>NULL</S_outAction>
+                <S_Fsm></S_Fsm>
+            </State>
+        </States>
+
+        <Transitions>
+            <Transition>
+                <T_Name>MOVE_UP_TO_MOVE_DOWN</T_Name>
+                <T_Origin>MOVING_UP</T_Origin>
+                <T_Destination>MOVING_DOWN</T_Destination>
+                <T_Action>NULL</T_Action>
+                <Events>
+                    <Event>
+                        <ID>BALL_BELOW_NPC</ID>
+                        <Type>BASIC</Type>
+                    </Event>
+                </Events>
+            </Transition>
+            <Transition>
+                <T_Name>MOVE_DOWN_TO_MOVE_UP</T_Name>
+                <T_Origin>MOVING_DOWN</T_Origin>
+                <T_Destination>MOVING_UP</T_Destination>
+                <T_Action>NULL</T_Action>
+                <Events>
+                    <Event>
+                        <ID>BALL_ABOVE_NPC</ID>
+                        <Type>BASIC</Type>
+                    </Event>
+                </Events>
+            </Transition>
+            <Transition>
+                <T_Name>MOVE_UP_TO_NOT_MOVING</T_Name>
+                <T_Origin>MOVING_UP</T_Origin>
+                <T_Destination>NOT_MOVING</T_Destination>
+                <T_Action>NULL</T_Action>
+                <Events>
+                    <Event>
+                        <ID>BALL_FAR_AWAY</ID>
+                        <Type>BASIC</Type>
+                    </Event>
+                </Events>
+            </Transition>
+            <Transition>
+                <T_Name>MOVE_DOWN_TO_NOT_MOVING</T_Name>
+                <T_Origin>MOVING_DOWN</T_Origin>
+                <T_Destination>NOT_MOVING</T_Destination>
+                <T_Action>NULL</T_Action>
+                <Events>
+                    <Event>
+                        <ID>BALL_FAR_AWAY</ID>
+                        <Type>BASIC</Type>
+                    </Event>
+                </Events>
+            </Transition>
+        </Transitions>
+    </Fsm>
+</FSM_Machine>

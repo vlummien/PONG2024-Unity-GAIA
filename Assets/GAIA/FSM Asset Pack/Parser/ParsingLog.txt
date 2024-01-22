@@ -1,0 +1,40 @@
+
+ 
+=============================================================================================
+...LOADING A CLASSIC MACHINE named 'PongAIDeterministic'
+>>ADDED STATE 'NOT_MOVING'.
+>>ADDED STATE 'MOVING_UP'.
+>>ADDED STATE 'MOVING_DOWN'.
+>>ADDED TRANSITION 'MOVE_UP_TO_MOVE_DOWN' to FSM.
+>>ADDED TRANSITION 'MOVE_UP_TO_MOVE_DOWN' to State 'MOVING_UP'.
+>>ADDED TRANSITION 'MOVE_DOWN_TO_MOVE_UP' to FSM.
+>>ADDED TRANSITION 'MOVE_DOWN_TO_MOVE_UP' to State 'MOVING_DOWN'.
+>>ADDED TRANSITION 'MOVE_UP_TO_NOT_MOVING' to FSM.
+>>ADDED TRANSITION 'MOVE_UP_TO_NOT_MOVING' to State 'MOVING_UP'.
+>>ADDED TRANSITION 'MOVE_DOWN_TO_NOT_MOVING' to FSM.
+>>ADDED TRANSITION 'MOVE_DOWN_TO_NOT_MOVING' to State 'MOVING_DOWN'.
+States ADDED: 3 of 3
+States NOT ADDED: 0
+Transitions ADDED: 4 of 4
+Transitions NOT ADDED: 0
+Number of errors: 0
+>>ERROR. There is not an initial state. Check XML file
+ (Parsing of CLASSIC Machine named 'PongAIDeterministic' is INCONSISTENT)
+ 
+=============================================================================================
+...LOADING A BT named 'PongNPCBT'
+>>ADDED TREE Root AND ITS CHILDS.
+Trees Added: 1 out of 1
+
+(Parsing of BT named "PongNPCBT" is OK!)
+ 
+Critical errors parsing BTs: 0
+
+LOG FILE	1/22/2024 7:37:15 PM
+--------------------------------------
+
+--------SUMMARY--------
+Number of main machines: 1
+Number of submachines: 0
+TOTAL MACHINES ADDED: 1
+NUMBER OF BTs ADDED: 1

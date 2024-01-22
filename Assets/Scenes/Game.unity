@@ -375,6 +375,7 @@ GameObject:
   - component: {fileID: 292809231}
   - component: {fileID: 292809234}
   - component: {fileID: 292809235}
+  - component: {fileID: 292809236}
   m_Layer: 0
   m_Name: Player 2
   m_TagString: Untagged
@@ -514,12 +515,26 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 292809229}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29d9dc0ae769e98449ad70f493f8635e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 30
+  ball: {fileID: 916477909}
+--- !u!114 &292809236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292809229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb4e6c676fe0849eba652fa1ac26c6ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Speed: 12
   ball: {fileID: 916477909}
 --- !u!1 &324980286
 GameObject:
@@ -1044,6 +1059,53 @@ Transform:
   - {fileID: 292809230}
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1065557979
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1065557981}
+  - component: {fileID: 1065557980}
+  m_Layer: 0
+  m_Name: GAIA_Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1065557980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065557979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63916f2a3c39ffe4a990dbbf82264eec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_xmlFilesFSM:
+  - {fileID: 4900000, guid: ffffa6fae271b5b479a24bed835f115f, type: 3}
+  m_xmlFilesBT:
+  - {fileID: 4900000, guid: 2382bb2d45044ef4bbb107e2b6d610ed, type: 3}
+--- !u!4 &1065557981
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065557979}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1073063923
 GameObject:
