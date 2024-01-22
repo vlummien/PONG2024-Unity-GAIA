@@ -13,9 +13,13 @@
 >>ADDED TRANSITION 'MOVE_UP_TO_NOT_MOVING' to State 'MOVING_UP'.
 >>ADDED TRANSITION 'MOVE_DOWN_TO_NOT_MOVING' to FSM.
 >>ADDED TRANSITION 'MOVE_DOWN_TO_NOT_MOVING' to State 'MOVING_DOWN'.
+>>ADDED TRANSITION 'NOT_MOVING_TO_MOVE_DOWN' to FSM.
+>>ADDED TRANSITION 'NOT_MOVING_TO_MOVE_DOWN' to State 'NOT_MOVING'.
+>>ADDED TRANSITION 'NOT_MOVING_TO_MOVE_UP' to FSM.
+>>ADDED TRANSITION 'NOT_MOVING_TO_MOVE_UP' to State 'NOT_MOVING'.
 States ADDED: 3 of 3
 States NOT ADDED: 0
-Transitions ADDED: 4 of 4
+Transitions ADDED: 6 of 6
 Transitions NOT ADDED: 0
 Number of errors: 0
 >>ERROR. There is not an initial state. Check XML file
@@ -30,7 +34,7 @@ Trees Added: 1 out of 1
  
 Critical errors parsing BTs: 0
 
-LOG FILE	1/22/2024 7:37:15 PM
+LOG FILE	1/22/2024 8:53:22 PM
 --------------------------------------
 
 --------SUMMARY--------

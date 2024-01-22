@@ -8,7 +8,7 @@
         <States>
             <State Initial="YES">
                 <S_Name>NOT_MOVING</S_Name>
-                <S_Action>NULL</S_Action>
+                <S_Action>DONT_MOVE</S_Action>
                 <S_inAction>NULL</S_inAction>
                 <S_outAction>NULL</S_outAction>
                 <S_Fsm></S_Fsm>
@@ -74,6 +74,30 @@
                 <Events>
                     <Event>
                         <ID>BALL_FAR_AWAY</ID>
+                        <Type>BASIC</Type>
+                    </Event>
+                </Events>
+            </Transition>
+            <Transition>
+                <T_Name>NOT_MOVING_TO_MOVE_DOWN</T_Name>
+                <T_Origin>NOT_MOVING</T_Origin>
+                <T_Destination>MOVING_DOWN</T_Destination>
+                <T_Action>NULL</T_Action>
+                <Events>
+                    <Event>
+                        <ID>BALL_BELOW_NPC</ID>
+                        <Type>BASIC</Type>
+                    </Event>
+                </Events>
+            </Transition>
+            <Transition>
+                <T_Name>NOT_MOVING_TO_MOVE_UP</T_Name>
+                <T_Origin>NOT_MOVING</T_Origin>
+                <T_Destination>MOVING_UP</T_Destination>
+                <T_Action>NULL</T_Action>
+                <Events>
+                    <Event>
+                        <ID>BALL_ABOVE_NPC</ID>
                         <Type>BASIC</Type>
                     </Event>
                 </Events>

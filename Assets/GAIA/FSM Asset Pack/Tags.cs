@@ -28,15 +28,16 @@ public static class Tags
 	public enum EventTags
 	{
 		NULL,
-		BALL_BELOW_NPC,
+		BALL_FAR_AWAY,
 		BALL_ABOVE_NPC,
-		BALL_FAR_AWAY
+		BALL_BELOW_NPC,
 	}
 
 	//ACTION TAGS
 	public enum ActionTags
 	{
 		NULL,
+		DONT_MOVE,
 		MOVE_UP,
 		MOVE_DOWN,
 	}

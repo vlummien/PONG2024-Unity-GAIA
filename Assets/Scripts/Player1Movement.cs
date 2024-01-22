@@ -32,7 +32,6 @@ public class Player1Movement : MonoBehaviour
     void Update()
     {
         float v = Input.GetAxisRaw("Vertical");
-        
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, v) * playerSpeed;
         
         

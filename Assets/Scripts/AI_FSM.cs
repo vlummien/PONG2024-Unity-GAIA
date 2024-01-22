@@ -67,18 +67,18 @@ public class AI_FSM : MonoBehaviour
 
     public void ExecuteAction(int actionTag)
     {
+        Debug.Log($"Execute Action: {actionTag}");
         switch (actionTag)
         {
-            case (int)Tags.ActionTags.NULL:
-                DoNothing();
-                break;
-
             case (int)Tags.ActionTags.MOVE_UP:
                 MoveUp();
                 break;
 
             case (int)Tags.ActionTags.MOVE_DOWN:
                 MoveDown();
+                break;
+            default:
+                DoNothing();
                 break;
         }
     }
@@ -87,24 +87,28 @@ public class AI_FSM : MonoBehaviour
     {
         FSMevents.Clear();
 
-        var BallPosition = ball.transform.position.y;
-        // Debug.Log("Ball position :" + BallPosition);
-        if (BallPosition > transform.position.y)
+        var ballPosition = ball.transform.position.y;
+        if (ballPosition > transform.position.y)
         {
-            FSMevents.Add((int)Tags.EventTags.BALL_ABOVE_NPC);
+            int actionId = (int)Tags.EventTags.BALL_ABOVE_NPC;
+            FSMevents.Add(actionId);
+            Debug.Log($"BALL_ABOVE_NPC Event added: {actionId}");
         }
-        
-        if (BallPosition < transform.position.y)
+
+        if (ballPosition < transform.position.y)
         {
-            FSMevents.Add((int)Tags.EventTags.BALL_BELOW_NPC);
+            int actionId = (int)Tags.EventTags.BALL_BELOW_NPC;
+            FSMevents.Add(actionId);
+            Debug.Log($"BALL_BELOW_NPC Event added: {actionId}");
         }
-        
+
         // TODO: BALL far away
 
         if (FSMevents.Count == 0)
         {
-            Debug.Log("No Events added");
-            FSMevents.Add((int)Tags.EventTags.NULL);
+            int actionId = (int)Tags.EventTags.NULL;
+            FSMevents.Add(actionId);
+            Debug.Log($"NULL Event added: {actionId}");
         }
 
         return FSMevents;
@@ -113,18 +117,24 @@ public class AI_FSM : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 BallPosition = GameObject.Find("Ball").transform.position;
+        Debug.Log("------- Update start -------- ");
+        Vector3 BallPosition = ball.transform.position;
         distance = Vector3.Distance(transform.position, BallPosition);
 
         m_Rigidbody.isKinematic = false;
-
+        
         FSMactions = FSM.Update();
+        foreach (int action in FSMactions)
+        {
+            Debug.Log($"Action: {action}");
+        }
         for (int i = 0; i < FSMactions.Count; i++)
         {
-            if (FSMactions[i] != (int)Tags.ActionTags.NULL)
-            {
+            // if (FSMactions[i] != (int)Tags.ActionTags.NULL)
+            // {
                 ExecuteAction(FSMactions[i]);
-            }
+            // }
         }
+        Debug.Log("------- Update end -------- ");
     }
 }
