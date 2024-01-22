@@ -60,3 +60,6 @@ crashlytics-build.properties
 
 #Apple generated
 **/.DS_Store
+
+# JetBrains Rider - project specific settings
+.idea/
