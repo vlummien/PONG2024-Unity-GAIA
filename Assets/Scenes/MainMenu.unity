@@ -797,7 +797,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: PONG 2022
+  m_Text: PONG 2024
 --- !u!222 &1356123137
 CanvasRenderer:
   m_ObjectHideFlags: 0
