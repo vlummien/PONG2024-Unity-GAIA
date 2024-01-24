@@ -19,7 +19,7 @@ public class BallMovement : MonoBehaviour
 
             while (Repeat) { }
 
-            BallDirectionX = Random.Range(-1f, -0.5f);
+            BallDirectionX = Random.Range(1f, 0.5f);
             BallDirectionY = Random.Range(-1f, -0.5f);
 
             if (BallDirectionY != 0 && BallDirectionX != 0)

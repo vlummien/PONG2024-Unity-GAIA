@@ -11,7 +11,11 @@ public static class Tags
 		NULL,
 		NOT_MOVING,
 		MOVING_UP,
-		MOVING_DOWN
+		MOVING_DOWN,
+		
+		// NPC 2
+		SPINNING,
+		DEFENDING
 	}
 
 	//Transition tags
@@ -21,7 +25,11 @@ public static class Tags
 		MOVE_UP_TO_MOVE_DOWN,
 		MOVE_DOWN_TO_MOVE_UP,
 		MOVE_UP_TO_NOT_MOVING,
-		MOVE_DOWN_TO_NOT_MOVING
+		MOVE_DOWN_TO_NOT_MOVING,
+		
+		// NPC 2 
+		SPINNING_TO_DEFENDING,
+		DEFENDING_TO_SPINNING,
 	}
 
 	//EVENT TAGS
@@ -31,6 +39,9 @@ public static class Tags
 		BALL_FAR_AWAY,
 		BALL_ABOVE_NPC,
 		BALL_BELOW_NPC,
+		
+		// NPC 2
+		BALL_NEAR
 	}
 
 	//ACTION TAGS
@@ -40,6 +51,10 @@ public static class Tags
 		DONT_MOVE,
 		MOVE_UP,
 		MOVE_DOWN,
+		
+		// NPC 2
+		SPIN,
+		DEFEND
 	}
 
 	// <summary>

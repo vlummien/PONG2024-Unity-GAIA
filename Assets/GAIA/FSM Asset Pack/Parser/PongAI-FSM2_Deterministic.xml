@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<FSM_Machine>
+    <FSMtype Probabilistic="NO">CLASSIC</FSMtype>
+    <FSMid>PongAIDeterministic2</FSMid>
+    <Fsm>
+        <Callback>HandleEvents</Callback>
+        <States>
+            <State Initial="YES">
+                <S_Name>SPINNING</S_Name>
+                <S_Action>SPIN</S_Action>
+                <S_inAction>SPIN</S_inAction>
+                <S_outAction>DEFEND</S_outAction>
+                <S_Fsm></S_Fsm>
+            </State>
+            <State Initial="NO">
+                <S_Name>DEFENDING</S_Name>
+                <S_Action>DEFEND</S_Action>
+                <S_inAction>DEFEND</S_inAction>
+                <S_outAction>SPIN</S_outAction>
+                <S_Fsm></S_Fsm>
+            </State>
+            
+        </States>
+
+        <Transitions>
+            <Transition>
+                <T_Name>SPINNING_TO_DEFENDING</T_Name>
+                <T_Origin>SPINNING</T_Origin>
+                <T_Destination>DEFENDING</T_Destination>
+                <T_Action>NULL</T_Action>
+                <Events>
+                    <Event>
+                        <ID>BALL_NEAR</ID>
+                        <Type>BASIC</Type>
+                    </Event>
+                </Events>
+            </Transition>
+            <Transition>
+                <T_Name>DEFENDING_TO_SPINNING</T_Name>
+                <T_Origin>DEFENDING</T_Origin>
+                <T_Destination>SPINNING</T_Destination>
+                <T_Action>NULL</T_Action>
+                <Events>
+                    <Event>
+                        <ID>BALL_FAR_AWAY</ID>
+                        <Type>BASIC</Type>
+                    </Event>
+                </Events>
+            </Transition>
+        </Transitions>
+    </Fsm>
+</FSM_Machine>

@@ -1,4 +1,5 @@
 ﻿//Uncoment the line below to enable the use of the BT functions.
+
 #define PANDA
 
 using UnityEngine;
@@ -12,13 +13,13 @@ using GAIA;
 /// elements could request a State Machine the Singletone Patterns has been implemented
 /// to simplify things.
 /// </summary>
-public class GAIA_Controller : MonoBehaviour 
+public class GAIA_Controller : MonoBehaviour
 {
     public TextAsset[] m_xmlFilesFSM; // ngs - xml files with the specification of the finite state machines
 
     public TextAsset[] m_xmlFilesBT; // xml files with the specification of the behavior trees
 
-    public GAIA_Manager m_manager;		 //MANAGER 		-> controls the parsing and initialization of FSMs
+    public GAIA_Manager m_manager; //MANAGER 		-> controls the parsing and initialization of FSMs
 
     // Singleton
     private static GAIA_Controller m_instance;
@@ -31,11 +32,12 @@ public class GAIA_Controller : MonoBehaviour
             {
                 m_instance = GameObject.FindObjectOfType<GAIA_Controller>();
             }
+
             return m_instance;
         }
     }
 
-	void Awake () 
+    void Awake()
     {
         //Creation of a new xmltest.GAIA_Parser
         GAIAXML.GAIA_Parser parser = new GAIAXML.GAIA_Parser();
@@ -63,7 +65,6 @@ public class GAIA_Controller : MonoBehaviour
         }
 #endif
         parser.WriteLog("");
-
+        
     }
-
 }
