@@ -520,12 +520,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 292809229}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29d9dc0ae769e98449ad70f493f8635e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
+  speed: 3
+  ballFarAwayDistance: 5
   ball: {fileID: 916477909}
 --- !u!114 &292809236
 MonoBehaviour:
@@ -534,13 +535,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 292809229}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb4e6c676fe0849eba652fa1ac26c6ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Speed: 3
-  ballFarAwayDistance: 4
+  ballFarAwayDistance: 5
   ball: {fileID: 916477909}
 --- !u!1 &324980286
 GameObject:
