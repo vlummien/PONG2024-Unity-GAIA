@@ -18,63 +18,18 @@
                 <Child_Nodes>
                   <CN>
                     <CN_Type>node</CN_Type>
-                    <CN_Name>ballFar</CN_Name>
+                    <CN_Name>ballNear</CN_Name>
                   </CN>
                   <CN>
                     <CN_Type>node</CN_Type>
-                    <CN_Name>ActivateSpin</CN_Name>
+                    <CN_Name>Defend</CN_Name>
                   </CN>
                 </Child_Nodes>
               </CN>
               
               <CN>
                 <CN_Type>node</CN_Type>
-                <CN_Name>sequence</CN_Name>
-                <Child_Nodes>
-                  <CN>
-                    <CN_Type>node</CN_Type>
-                    <CN_Name>isSpinning</CN_Name>
-                  </CN>
-                  <CN>
-                    <CN_Type>node</CN_Type>
-                    <CN_Name>StopSpin</CN_Name>
-                  </CN>
-                </Child_Nodes>
-              </CN>
-
-              <CN>
-                <CN_Type>node</CN_Type>
-                <CN_Name>sequence</CN_Name>
-                <Child_Nodes>
-                  <CN>
-                    <CN_Type>node</CN_Type>
-                    <CN_Name>ballAbove</CN_Name>
-                  </CN>
-                  <CN>
-                    <CN_Type>node</CN_Type>
-                    <CN_Name>MoveUp</CN_Name>
-                  </CN>
-                </Child_Nodes>
-              </CN>
-              
-              <CN>
-                <CN_Type>node</CN_Type>
-                <CN_Name>sequence</CN_Name>
-                <Child_Nodes>
-                  <CN>
-                    <CN_Type>node</CN_Type>
-                    <CN_Name>ballBelow</CN_Name>
-                  </CN>
-                  <CN>
-                    <CN_Type>node</CN_Type>
-                    <CN_Name>MoveDown</CN_Name>
-                  </CN>
-                </Child_Nodes>
-              </CN>
-              
-              <CN>
-                <CN_Type>node</CN_Type>
-                <CN_Name>DoNothing</CN_Name>
+                <CN_Name>ActivateSpin</CN_Name>
               </CN>
               
             </Child_Nodes>

@@ -63,17 +63,20 @@ public class AI_BT2 : MonoBehaviour
     }
 
     [Task]
-    private void MoveUp()
+    private void Defend()
     {
-        Debug.Log("BT AI: MoveUp");
-        transform.Translate((Vector2.up * m_Speed * Time.deltaTime));
-    }
+        Debug.Log("BT AI: Defend!");
+        StopSpin();
+        var ballPositionY = ball.transform.position.y;
+        if (ballPositionY > transform.position.y)
+        {
+            transform.Translate((Vector2.up * m_Speed * Time.deltaTime));
+        }
 
-    [Task]
-    private void MoveDown()
-    {
-        Debug.Log("BT AI: MoveDown");
-        transform.Translate((Vector2.down * m_Speed * Time.deltaTime));
+        if (ballPositionY < transform.position.y)
+        {
+            transform.Translate((Vector2.down * m_Speed * Time.deltaTime));
+        }
     }
 
     [Task]
@@ -81,12 +84,6 @@ public class AI_BT2 : MonoBehaviour
     {
         Debug.Log("BT AI: Spin to win!");
         spinToWin = true;
-    }
-    
-    [Task]
-    private void DoNothing()
-    {
-        Debug.Log("BT AI: I relax now");
     }
 
     [Task]
@@ -99,29 +96,10 @@ public class AI_BT2 : MonoBehaviour
     // CONDITIONS
 
     [Task]
-    bool ballFar()
+    bool ballNear()
     {
         Debug.Log(distanceToBall);
-        return distanceToBall > ballFarAwayDistance;
-    }
-
-    [Task]
-    bool isSpinning()
-    {
-        return spinToWin;
-    }
-
-    [Task]
-    bool ballAbove()
-    {
-        return ball.transform.position.y > transform.position.y;
-    }
-
-    [Task]
-    bool ballBelow()
-    {
-        Debug.Log(ball.transform.position.y);
-        return ball.transform.position.y < transform.position.y;
+        return ballFarAwayDistance > distanceToBall;
     }
     
     // CONDITIONS END
