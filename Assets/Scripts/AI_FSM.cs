@@ -7,8 +7,8 @@ using UnityEngine.AI;
 
 public class AI_FSM : MonoBehaviour
 {
-    public float m_Speed = 12f;
-    public float ballFarAwayDistance = 5f;
+    public float m_Speed = 3.3f;
+    public float ballFarAwayDistance = 4.5f;
     public GameObject ball;
 
     private Rigidbody2D m_Rigidbody; // Reference used to move the tank.
@@ -34,8 +34,8 @@ public class AI_FSM : MonoBehaviour
 
     private void OnDisable()
     {
-        // When turned off, set it to kinematic so it stops moving.
         m_Rigidbody.isKinematic = true;
+        manager.deleteFSM(FSM.getFSM());
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -123,8 +123,7 @@ public class AI_FSM : MonoBehaviour
 
         return FSMevents;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         Debug.Log("------- Update start -------- ");
@@ -147,5 +146,6 @@ public class AI_FSM : MonoBehaviour
             // }
         }
         Debug.Log("------- Update end -------- ");
+        Debug.Log("FSM active ");
     }
 }

@@ -5,29 +5,33 @@ using UnityEngine;
 
 public class AI : MonoBehaviour
 {
-    public float speed = 10;
-    public float ballFarAwayDistance = 5f;
+    public float speed = 3.3f;
+    public float ballFarAwayDistance = 4.5f;
     public GameObject ball;
     
     private float distanceToBall; // Store the distance between the player and the ball.
+    
+    
+    private Quaternion initialRotation;
+
+    void Awake()
+    {
+        initialRotation = transform.rotation;
+    }
+
+    private void OnEnable()
+    {
+        transform.rotation = initialRotation;
+    }
 
     public void Update()
     {
-        
+        Debug.Log("Source Code AI active");
         Vector3 BallPosition = ball.transform.position;
         distanceToBall = Mathf.Abs(transform.position.x - BallPosition.x);
-    }
-
-    public void FixedUpdate()
-    {
+  
         var moveDistance = speed * Time.deltaTime;
-
-
-        // var ballDistance = Mathf.Abs(transform.position.y - ball.transform.position.y);
-        // if (moveDistance > ballDistance)
-        // {
-        //     moveDistance = ballDistance / 2;
-        // }
+        
 
         if (distanceToBall > ballFarAwayDistance)
         {

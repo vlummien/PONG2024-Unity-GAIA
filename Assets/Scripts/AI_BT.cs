@@ -15,15 +15,17 @@ public class AI_BT : MonoBehaviour
 
     private float distanceToBall; // Store the distance between the player and the ball.
     private Rigidbody2D m_Rigidbody; // Reference used to move the tank.
-    private bool spinToWin; // Bool to determine whether the player spins or not.
-    private float degreesPerSecond = 200;        // Magnitude of spin of death rotation.
 
     public string BTFileName; // Choose the BT to load by txt file name.
     private GAIA_Manager manager; // Instatiates the manager.
+    
+    private Quaternion initialRotation;
+
 
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody2D>();
+        initialRotation = transform.rotation;
     }
 
 
@@ -31,19 +33,20 @@ public class AI_BT : MonoBehaviour
     {
         // When turned on, make sure it's not kinematic.
         m_Rigidbody.isKinematic = false;
+        manager.changeTickOn(gameObject, BehaviourTree.UpdateOrder.Update);
+        transform.rotation = initialRotation;
     }
 
     private void OnDisable()
     {
         // When turned off, set it to kinematic so it stops moving.
         m_Rigidbody.isKinematic = true;
-        manager.changeBT(gameObject, BTFileName);
+        manager.changeTickOn(gameObject, BehaviourTree.UpdateOrder.Manual);
     }
-    
+
 
     void Start()
     {
-        spinToWin = false;
         manager = GAIA_Controller.INSTANCE.m_manager;
 #if (PANDA)
         manager.createBT(gameObject, BTFileName);
@@ -52,6 +55,7 @@ public class AI_BT : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("BT AI is active");
 #if (PANDA)
         // Update the Panda Behaviour Tree for checking new state
         manager.changeBT(gameObject, BTFileName);
@@ -78,13 +82,6 @@ public class AI_BT : MonoBehaviour
         Debug.Log("BT AI: Saving Energy");
     }
 
-    [Task]
-    bool ActivateSpin()
-    {
-        spinToWin = true;
-        return true;
-    }
-    
     // CONDITIONS
 
     [Task]
@@ -106,47 +103,16 @@ public class AI_BT : MonoBehaviour
         Debug.Log(ball.transform.position.y);
         return ball.transform.position.y < transform.position.y;
     }
-    
+
     // CONDITIONS END
-
-    [Task]
-    bool StopSpin()
-    {
-        spinToWin = false;
-        return true;
-    }
     
-    bool changeColor()
-    {
-        MeshRenderer[] renderers = GetComponentsInChildren<MeshRenderer>();
-
-        Color random = new Color(
-            Random.Range(0f, 1f),
-            Random.Range(0f, 1f),
-            Random.Range(0f, 1f)
-        );
-
-        for (int i = 0; i < renderers.Length; i++)
-        {
-            renderers[i].material.color = random;
-        }
-
-        return true;
-    }
 
     void LateUpdate()
     {
         Vector3 BallPosition = ball.transform.position;
         distanceToBall = Mathf.Abs(transform.position.x - BallPosition.x);
-        
+
 
         m_Rigidbody.isKinematic = false;
-
-        
-        if (spinToWin)
-        {
-            transform.Rotate(Vector3.up * degreesPerSecond * Time.deltaTime, Space.Self);
-            transform.Rotate(Vector3.left * degreesPerSecond * Time.deltaTime, Space.Self);
-        }
     }
 }

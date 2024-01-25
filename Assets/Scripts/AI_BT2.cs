@@ -34,13 +34,14 @@ public class AI_BT2 : MonoBehaviour
     {
         // When turned on, make sure it's not kinematic.
         m_Rigidbody.isKinematic = false;
+        manager.changeTickOn(gameObject, BehaviourTree.UpdateOrder.Update);
     }
 
     private void OnDisable()
     {
         // When turned off, set it to kinematic so it stops moving.
         m_Rigidbody.isKinematic = true;
-        manager.changeBT(gameObject, BTFileName);
+        manager.changeTickOn(gameObject, BehaviourTree.UpdateOrder.Manual);
     }
     
 
@@ -59,6 +60,7 @@ public class AI_BT2 : MonoBehaviour
 #if (PANDA)
         // Update the Panda Behaviour Tree for checking new state
         manager.changeBT(gameObject, BTFileName);
+        Debug.Log("BT AI is active");
 #endif
     }
 
@@ -103,24 +105,6 @@ public class AI_BT2 : MonoBehaviour
     }
     
     // CONDITIONS END
-    
-    bool changeColor()
-    {
-        MeshRenderer[] renderers = GetComponentsInChildren<MeshRenderer>();
-
-        Color random = new Color(
-            Random.Range(0f, 1f),
-            Random.Range(0f, 1f),
-            Random.Range(0f, 1f)
-        );
-
-        for (int i = 0; i < renderers.Length; i++)
-        {
-            renderers[i].material.color = random;
-        }
-
-        return true;
-    }
 
     void LateUpdate()
     {

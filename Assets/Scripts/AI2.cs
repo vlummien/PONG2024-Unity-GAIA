@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AI2 : MonoBehaviour
 {
-    public float speed = 3.2f;
+    public float speed = 3.3f;
     public float ballFarAwayDistance = 4.5f;
     public GameObject ball;
     public float rotationSpeed = 1000f;
@@ -25,10 +25,6 @@ public class AI2 : MonoBehaviour
         
         Vector3 BallPosition = ball.transform.position;
         distanceToBall = Mathf.Abs(transform.position.x - BallPosition.x);
-    }
-
-    public void FixedUpdate()
-    {
         var moveDistance = speed * Time.deltaTime;
         
 
@@ -52,5 +48,6 @@ public class AI2 : MonoBehaviour
                 transform.Translate((Vector2.down * moveDistance));
             }
         }
+        Debug.Log("Source Code AI active");
     }
 }

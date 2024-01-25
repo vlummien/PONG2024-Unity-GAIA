@@ -7,8 +7,8 @@ using UnityEngine.AI;
 
 public class AI_FSM2 : MonoBehaviour
 {
-    public float m_Speed = 12f;
-    public float ballFarAwayDistance = 5f;
+    public float m_Speed = 3.3f;
+    public float ballFarAwayDistance = 4.5f;
     public GameObject ball;
     public float rotationSpeed = 1000f;
 
@@ -22,9 +22,11 @@ public class AI_FSM2 : MonoBehaviour
     private GAIA_Manager manager;
     private List<int> FSMactions; // Variable que contiene las acciones a realizar en cada update.
     private List<int> FSMevents = new List<int>();
+    
 
     private void Awake()
     {
+        initialRotation = transform.rotation;
         m_Rigidbody = GetComponent<Rigidbody2D>();
     }
 
@@ -32,6 +34,7 @@ public class AI_FSM2 : MonoBehaviour
     private void OnEnable()
     {
         m_Rigidbody.isKinematic = false;
+        transform.rotation = initialRotation;
     }
 
 
@@ -39,6 +42,7 @@ public class AI_FSM2 : MonoBehaviour
     {
         // When turned off, set it to kinematic so it stops moving.
         m_Rigidbody.isKinematic = true;
+        manager.deleteFSM(FSM.getFSM());
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -49,7 +53,6 @@ public class AI_FSM2 : MonoBehaviour
 
     void Start()
     {
-        initialRotation = transform.rotation;
         manager = GAIA_Controller.INSTANCE.m_manager;
         FSM = manager.createMachine(this, (int)FA_Classic.FAType.CLASSIC, "PongAIDeterministic2");
         addNoEvent();
@@ -160,5 +163,6 @@ public class AI_FSM2 : MonoBehaviour
         }
 
         Debug.Log("------- Update end -------- ");
+        Debug.Log("FSM active ");
     }
 }
