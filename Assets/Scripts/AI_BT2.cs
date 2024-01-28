@@ -1,32 +1,24 @@
 #define PANDA
 
 using System;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.AI;
 using Panda;
 using GAIA;
-using Random = UnityEngine.Random;
 
 public class AI_BT2 : MonoBehaviour
 {
-    public float m_Speed = 3.3f;
-    public float ballFarAwayDistance = 4.5f;
-    public GameObject ball;
-    public float rotationSpeed = 1000f;
-
-    private float distanceToBall; // Store the distance between the player and the ball.
-    private Rigidbody2D m_Rigidbody; // Reference used to move the tank.
-    private bool spinToWin; // Bool to determine whether the player spins or not.
-    private float degreesPerSecond = 200;        // Magnitude of spin of death rotation.
-
-    public string BTFileName; // Choose the BT to load by txt file name.
-    private GAIA_Manager manager; // Instatiates the manager.
-
-    private Quaternion initialRotation;
+    public string BTFileName;
+    
+    private Rigidbody2D m_Rigidbody; 
+    private GAIA_Manager manager; 
+    private PlayerManagement playerManagement;
 
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody2D>();
+        playerManagement = GetComponent<PlayerManagement>();
     }
 
 
@@ -43,12 +35,10 @@ public class AI_BT2 : MonoBehaviour
         m_Rigidbody.isKinematic = true;
         manager.changeTickOn(gameObject, BehaviourTree.UpdateOrder.Manual);
     }
-    
+
 
     void Start()
     {
-        initialRotation = transform.rotation;
-        spinToWin = false;
         manager = GAIA_Controller.INSTANCE.m_manager;
 #if (PANDA)
         manager.createBT(gameObject, BTFileName);
@@ -60,64 +50,52 @@ public class AI_BT2 : MonoBehaviour
 #if (PANDA)
         // Update the Panda Behaviour Tree for checking new state
         manager.changeBT(gameObject, BTFileName);
-        Debug.Log("BT AI is active");
+        Debug.Log("BT AI 2 is active");
 #endif
     }
+    
+    // Actions
 
     [Task]
     private void Defend()
     {
-        Debug.Log("BT AI: Defend!");
-        StopSpin();
-        var ballPositionY = ball.transform.position.y;
-        if (ballPositionY > transform.position.y)
-        {
-            transform.Translate((Vector2.up * m_Speed * Time.deltaTime));
-        }
+        playerManagement.Defend();
+    }
 
-        if (ballPositionY < transform.position.y)
-        {
-            transform.Translate((Vector2.down * m_Speed * Time.deltaTime));
-        }
+    [Task]
+    private void SuperDefend()
+    {
+        playerManagement.SuperDefend();
     }
 
     [Task]
     private void ActivateSpin()
     {
-        Debug.Log("BT AI: Spin to win!");
-        spinToWin = true;
+        playerManagement.ActivateSpin();
     }
 
     [Task]
     private void StopSpin()
     {
-        spinToWin = false;
-        transform.rotation = initialRotation;
+        playerManagement.StopSpin();
     }
     
-    // CONDITIONS
+    // Actions End
+
+    // (BT SEQUENCE) CONDITIONS
 
     [Task]
     bool ballNear()
     {
-        Debug.Log(distanceToBall);
-        return ballFarAwayDistance > distanceToBall;
+        return playerManagement.BallNear();
     }
-    
-    // CONDITIONS END
 
-    void LateUpdate()
+    [Task]
+    bool ballNearAndSuperDefend()
     {
-        Vector3 BallPosition = ball.transform.position;
-        distanceToBall = Mathf.Abs(transform.position.x - BallPosition.x);
-        
-
-        m_Rigidbody.isKinematic = false;
-
-        
-        if (spinToWin)
-        {
-            transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
-        }
+        return ballNear() && playerManagement.isSuperDefend;
     }
+
+    // CONDITIONS END
+    
 }

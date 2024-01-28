@@ -18,6 +18,21 @@
                 <Child_Nodes>
                   <CN>
                     <CN_Type>node</CN_Type>
+                    <CN_Name>ballNearAndSuperDefend</CN_Name>
+                  </CN>
+                  <CN>
+                    <CN_Type>node</CN_Type>
+                    <CN_Name>SuperDefend</CN_Name>
+                  </CN>
+                </Child_Nodes>
+              </CN>
+
+              <CN>
+                <CN_Type>node</CN_Type>
+                <CN_Name>sequence</CN_Name>
+                <Child_Nodes>
+                  <CN>
+                    <CN_Type>node</CN_Type>
                     <CN_Name>ballNear</CN_Name>
                   </CN>
                   <CN>

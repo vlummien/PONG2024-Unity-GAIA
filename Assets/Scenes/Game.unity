@@ -1092,6 +1092,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BallDirectionX: 0
   BallDirectionY: 0
+  isMovingToLeftSide: 0
 --- !u!58 &916477913
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1145,6 +1146,7 @@ MonoBehaviour:
   player2: 0
   Player1Score: {fileID: 343379755}
   Player2Score: {fileID: 1559490550}
+  aiPlayer: {fileID: 1503132735}
 --- !u!114 &916477916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2019,7 +2021,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194018602}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2a3c587004752a04888c5e0f0d5c6fe0, type: 3}
@@ -2368,10 +2370,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c928f54c8dbb043dbbf7ddedb9919621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Speed: 3.3
-  ballFarAwayDistance: 4.5
-  ball: {fileID: 916477909}
-  rotationSpeed: 1000
   BTFileName: PongAIBT2
 --- !u!1 &1503132735
 GameObject:
@@ -2393,6 +2391,7 @@ GameObject:
   - component: {fileID: 1503132747}
   - component: {fileID: 1503132746}
   - component: {fileID: 1503132745}
+  - component: {fileID: 1503132748}
   m_Layer: 0
   m_Name: NPC GAIA
   m_TagString: Untagged
@@ -2453,7 +2452,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1503132735}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29d9dc0ae769e98449ad70f493f8635e, type: 3}
   m_Name: 
@@ -2617,15 +2616,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1503132735}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c928f54c8dbb043dbbf7ddedb9919621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Speed: 3.3
-  ballFarAwayDistance: 4.5
-  ball: {fileID: 916477909}
-  rotationSpeed: 1000
   BTFileName: PongAIBT2
 --- !u!114 &1503132747
 MonoBehaviour:
@@ -2643,6 +2638,26 @@ MonoBehaviour:
   ballFarAwayDistance: 4.5
   ball: {fileID: 916477909}
   rotationSpeed: 1000
+--- !u!114 &1503132748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503132735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 543ee3005cdd144509186bd39cd977ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  rotationSpeed: 1000
+  superDefendScaleFactor: 1.4
+  superDefendSpeedFactor: 1.1
+  ball: {fileID: 916477909}
+  ballFarAwayDistance: 4.5
+  isSuperDefend: 0
+  spinToWin: 0
 --- !u!1 &1559490548
 GameObject:
   m_ObjectHideFlags: 0

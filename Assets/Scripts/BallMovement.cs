@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BallMovement : MonoBehaviour
 {
@@ -10,9 +12,13 @@ public class BallMovement : MonoBehaviour
     public float BallDirectionY;
     bool Repeat = false;
 
+    [HideInInspector] public bool isMovingToLeftSide = false;
+    private Rigidbody2D rigidbody2D;
+
 
     public void Start()
     {
+        rigidbody2D = GetComponent<Rigidbody2D>();
 
         if (Input.GetKey(KeyCode.Return))
         {
@@ -24,7 +30,7 @@ public class BallMovement : MonoBehaviour
 
             if (BallDirectionY != 0 && BallDirectionX != 0)
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(BallDirectionX, BallDirectionY) * BallSpeed;
+                rigidbody2D.velocity = new Vector2(BallDirectionX, BallDirectionY) * BallSpeed;
                 Repeat = false;
             }
 
@@ -38,14 +44,15 @@ public class BallMovement : MonoBehaviour
     public void Update()
     {
         ResetBall();
+        isMovingToLeftSide = rigidbody2D.velocity.x < 0;
     }
 
     public void ResetBall()
     {
         if (Input.GetKey(KeyCode.Return))
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            GetComponent<Rigidbody2D>().transform.position = new Vector3(0, -1, 1);
+            rigidbody2D.velocity = new Vector2(0, 0);
+            rigidbody2D.transform.position = new Vector3(0, -1, 1);
 
             if (Input.GetKey(KeyCode.Return))
             {

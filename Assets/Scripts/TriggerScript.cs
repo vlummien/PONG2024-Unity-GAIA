@@ -13,6 +13,8 @@ public class TriggerScript : MonoBehaviour
     public Text Player1Score;
     public Text Player2Score;
 
+    public GameObject aiPlayer;
+
     public void Start()
     {
         Player1Score.text = $"PLAYER 1 SCORE: {player1.ToString()}";
@@ -48,6 +50,10 @@ public class TriggerScript : MonoBehaviour
     {
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         GetComponent<Rigidbody2D>().transform.position = new Vector3(0, -1, 1);
+        
+        // onGamePointEnd
+        PlayerManagement playerManagement = aiPlayer.GetComponent<PlayerManagement>();
+        playerManagement.OnGamePointEnd();
     }
 
     public void PlayerWins()
