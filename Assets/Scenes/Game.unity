@@ -265,10 +265,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9c62086a8b4a4acaadef483e043eafc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Speed: 3.2
-  ballFarAwayDistance: 4.5
-  ball: {fileID: 916477909}
-  rotationSpeed: 1000
 --- !u!61 &171304089
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1241,10 +1237,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c17891e965d544b06b73aaec3432a26c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3.3
-  ballFarAwayDistance: 4.5
-  ball: {fileID: 916477909}
-  rotationSpeed: 1000
 --- !u!61 &1008992003
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2422,7 +2414,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1503132735}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb4e6c676fe0849eba652fa1ac26c6ad, type: 3}
   m_Name: 
@@ -2591,9 +2583,11 @@ MonoBehaviour:
   ai2: {fileID: 1503132747}
   aibt2: {fileID: 1503132746}
   aifsm2: {fileID: 1503132745}
+  playerManagement: {fileID: 1503132748}
   materials:
   - {fileID: 2100000, guid: f89c245c6940b43c7938e8cf16ab4054, type: 2}
   - {fileID: 2100000, guid: fe82942fa05974f3389dc129be915d0c, type: 2}
+  activeBehavior: 0
 --- !u!114 &1503132745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2606,10 +2600,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9c62086a8b4a4acaadef483e043eafc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Speed: 3.3
-  ballFarAwayDistance: 4.5
-  ball: {fileID: 916477909}
-  rotationSpeed: 1000
 --- !u!114 &1503132746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2617,7 +2607,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1503132735}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c928f54c8dbb043dbbf7ddedb9919621, type: 3}
   m_Name: 
@@ -2635,10 +2625,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c17891e965d544b06b73aaec3432a26c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3.3
-  ballFarAwayDistance: 4.5
-  ball: {fileID: 916477909}
-  rotationSpeed: 1000
 --- !u!114 &1503132748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2657,6 +2643,7 @@ MonoBehaviour:
   superDefendSpeedFactor: 1.1
   ball: {fileID: 916477909}
   ballFarAwayDistance: 4.5
+  aiBehaviorChanger: {fileID: 1503132744}
   isSuperDefend: 0
   spinToWin: 0
 --- !u!1 &1559490548

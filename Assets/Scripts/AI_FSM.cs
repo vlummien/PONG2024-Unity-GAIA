@@ -7,12 +7,8 @@ using UnityEngine.AI;
 
 public class AI_FSM : MonoBehaviour
 {
-    public float m_Speed = 3.3f;
-    public float ballFarAwayDistance = 4.5f;
+    private PlayerManagement playerManagement;
     public GameObject ball;
-
-    private Rigidbody2D m_Rigidbody; // Reference used to move the tank.
-    private float distanceToBall; // Store the distance between the player and the ball.
 
     //IA attributes
     private FSM_Machine FSM;
@@ -22,19 +18,11 @@ public class AI_FSM : MonoBehaviour
 
     private void Awake()
     {
-        m_Rigidbody = GetComponent<Rigidbody2D>();
+        playerManagement = GetComponent<PlayerManagement>();
     }
-
-
-    private void OnEnable()
-    {
-        m_Rigidbody.isKinematic = false;
-    }
-
 
     private void OnDisable()
     {
-        m_Rigidbody.isKinematic = true;
         manager.deleteFSM(FSM.getFSM());
     }
 
@@ -51,15 +39,6 @@ public class AI_FSM : MonoBehaviour
         addNoEvent();
     }
 
-    private void MoveUp()
-    {
-        transform.Translate((Vector2.up * m_Speed * Time.deltaTime ));
-    }
-
-    private void MoveDown()
-    {
-        transform.Translate((Vector2.down * m_Speed * Time.deltaTime ));
-    }
 
     private void DoNothing()
     {
@@ -72,12 +51,17 @@ public class AI_FSM : MonoBehaviour
         switch (actionTag)
         {
             case (int)Tags.ActionTags.MOVE_UP:
-                MoveUp();
+                playerManagement.MoveUp();
                 break;
 
             case (int)Tags.ActionTags.MOVE_DOWN:
-                MoveDown();
+                playerManagement.MoveDown();
                 break;
+
+            case (int)Tags.ActionTags.COME_CLOSER:
+                playerManagement.ComingCloser();
+                break;
+            
             default:
                 DoNothing();
                 break;
@@ -89,9 +73,12 @@ public class AI_FSM : MonoBehaviour
         FSMevents.Clear();
 
 
-        Debug.Log($"Distance to Ball :{distanceToBall}");
-        Debug.Log($"ballFarAwayDistance :{ballFarAwayDistance}");
-        if ( distanceToBall > ballFarAwayDistance)
+        if (!playerManagement.BallNear() && playerManagement.isComingCloser)
+        {
+            int actionId = (int)Tags.EventTags.COMING_CLOSER_AVAILABLE;
+            FSMevents.Add(actionId);
+        }
+        else if (!playerManagement.BallNear())
         {
             int actionId = (int)Tags.EventTags.BALL_FAR_AWAY;
             FSMevents.Add(actionId);
@@ -103,14 +90,12 @@ public class AI_FSM : MonoBehaviour
             {
                 int actionId = (int)Tags.EventTags.BALL_ABOVE_NPC;
                 FSMevents.Add(actionId);
-                Debug.Log($"BALL_ABOVE_NPC Event added: {actionId}");
             }
 
             if (ballPositionY < transform.position.y)
             {
                 int actionId = (int)Tags.EventTags.BALL_BELOW_NPC;
                 FSMevents.Add(actionId);
-                Debug.Log($"BALL_BELOW_NPC Event added: {actionId}");
             }
         }
 
@@ -118,34 +103,27 @@ public class AI_FSM : MonoBehaviour
         {
             int actionId = (int)Tags.EventTags.NULL;
             FSMevents.Add(actionId);
-            Debug.Log($"NULL Event added: {actionId}");
         }
 
         return FSMevents;
     }
-    
+
     void Update()
     {
-        Debug.Log("------- Update start -------- ");
-        Vector3 BallPosition = ball.transform.position;
-        distanceToBall = Mathf.Abs(transform.position.x - BallPosition.x);
-        
+        Debug.Log("FSM active ");
 
-        m_Rigidbody.isKinematic = false;
-        
         FSMactions = FSM.Update();
         foreach (int action in FSMactions)
         {
             Debug.Log($"Action: {action}");
         }
+
         for (int i = 0; i < FSMactions.Count; i++)
         {
             // if (FSMactions[i] != (int)Tags.ActionTags.NULL)
             // {
-                ExecuteAction(FSMactions[i]);
+            ExecuteAction(FSMactions[i]);
             // }
         }
-        Debug.Log("------- Update end -------- ");
-        Debug.Log("FSM active ");
     }
 }

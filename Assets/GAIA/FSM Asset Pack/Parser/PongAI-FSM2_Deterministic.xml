@@ -20,6 +20,13 @@
                 <S_outAction>SPIN</S_outAction>
                 <S_Fsm></S_Fsm>
             </State>
+            <State Initial="NO">
+                <S_Name>SUPERDEFENDING</S_Name>
+                <S_Action>SUPERDEFEND</S_Action>
+                <S_inAction>SUPERDEFEND</S_inAction>
+                <S_outAction>SPIN</S_outAction>
+                <S_Fsm></S_Fsm>
+            </State>
             
         </States>
 
@@ -48,6 +55,57 @@
                     </Event>
                 </Events>
             </Transition>
+            
+            <Transition>
+                <T_Name>DEFENDING_TO_SUPERDEFENDING</T_Name>
+                <T_Origin>DEFENDING</T_Origin>
+                <T_Destination>SUPERDEFENDING</T_Destination>
+                <T_Action>NULL</T_Action>
+                <Events>
+                    <Event>
+                        <ID>SUPERDEFENDING_AVAILABLE</ID>
+                        <Type>BASIC</Type>
+                    </Event>
+                </Events>
+            </Transition>
+            <Transition>
+                <T_Name>SPINNING_TO_SUPERDEFENDING</T_Name>
+                <T_Origin>SPINNING</T_Origin>
+                <T_Destination>SUPERDEFENDING</T_Destination>
+                <T_Action>NULL</T_Action>
+                <Events>
+                    <Event>
+                        <ID>SUPERDEFENDING_AVAILABLE</ID>
+                        <Type>BASIC</Type>
+                    </Event>
+                </Events>
+            </Transition>
+            
+            <Transition>
+                <T_Name>SUPERDEFENDING_TO_SPINNING</T_Name>
+                <T_Origin>SUPERDEFENDING</T_Origin>
+                <T_Destination>SPINNING</T_Destination>
+                <T_Action>NULL</T_Action>
+                <Events>
+                    <Event>
+                        <ID>BALL_FAR_AWAY</ID>
+                        <Type>BASIC</Type>
+                    </Event>
+                </Events>
+            </Transition>
+
+<!--            <Transition>-->
+<!--                <T_Name>SUPERDEFENDING_TO_DEFENDING</T_Name>-->
+<!--                <T_Origin>SUPERDEFENDING</T_Origin>-->
+<!--                <T_Destination>DEFENDING</T_Destination>-->
+<!--                <T_Action>NULL</T_Action>-->
+<!--                <Events>-->
+<!--                    <Event>-->
+<!--                        <ID>BALL_NEAR</ID>-->
+<!--                        <Type>BASIC</Type>-->
+<!--                    </Event>-->
+<!--                </Events>-->
+<!--            </Transition>-->
         </Transitions>
     </Fsm>
 </FSM_Machine>

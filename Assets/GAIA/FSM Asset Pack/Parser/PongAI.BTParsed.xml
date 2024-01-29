@@ -18,6 +18,21 @@
                 <Child_Nodes>
                   <CN>
                     <CN_Type>node</CN_Type>
+                    <CN_Name>comeCloserAvailable</CN_Name>
+                  </CN>
+                  <CN>
+                    <CN_Type>node</CN_Type>
+                    <CN_Name>ComeCloser</CN_Name>
+                  </CN>
+                </Child_Nodes>
+              </CN>
+
+              <CN>
+                <CN_Type>node</CN_Type>
+                <CN_Name>sequence</CN_Name>
+                <Child_Nodes>
+                  <CN>
+                    <CN_Type>node</CN_Type>
                     <CN_Name>ballFar</CN_Name>
                   </CN>
                   <CN>

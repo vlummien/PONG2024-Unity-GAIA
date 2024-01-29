@@ -7,13 +7,14 @@ public class AI_BehaviorChanger : MonoBehaviour
     public AI ai;
     public AI_BT aibt;
     public AI_FSM aifsm;
-
     public AI2 ai2;
     public AI_BT2 aibt2;
     public AI_FSM2 aifsm2;
 
+    public PlayerManagement playerManagement;
+
     public Material[] materials; // Array of materials
-    private int activeBehavior = 0;
+    [HideInInspector] public int activeBehavior = 0;
 
     private enum Engine
     {
@@ -58,6 +59,8 @@ public class AI_BehaviorChanger : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C))
         {
             ChangeBehavior();
+            playerManagement.DeactivateSuperDefend();
+            playerManagement.StopSpin();
         }
     }
 
@@ -94,4 +97,5 @@ public class AI_BehaviorChanger : MonoBehaviour
                 break;
         }
     }
+    
 }

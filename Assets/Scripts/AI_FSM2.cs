@@ -7,41 +7,22 @@ using UnityEngine.AI;
 
 public class AI_FSM2 : MonoBehaviour
 {
-    public float m_Speed = 3.3f;
-    public float ballFarAwayDistance = 4.5f;
-    public GameObject ball;
-    public float rotationSpeed = 1000f;
-
-    private Rigidbody2D m_Rigidbody; // Reference used to move the tank.
-    private float distanceToBall; // Store the distance between the player and the ball.
-    private bool spinToWin; // Bool to determine whether the player spins or not.
-    private Quaternion initialRotation;
+    private PlayerManagement playerManagement;
 
     //IA attributes
     private FSM_Machine FSM;
     private GAIA_Manager manager;
     private List<int> FSMactions; // Variable que contiene las acciones a realizar en cada update.
     private List<int> FSMevents = new List<int>();
-    
+
 
     private void Awake()
     {
-        initialRotation = transform.rotation;
-        m_Rigidbody = GetComponent<Rigidbody2D>();
+        playerManagement = GetComponent<PlayerManagement>();
     }
-
-
-    private void OnEnable()
-    {
-        m_Rigidbody.isKinematic = false;
-        transform.rotation = initialRotation;
-    }
-
 
     private void OnDisable()
     {
-        // When turned off, set it to kinematic so it stops moving.
-        m_Rigidbody.isKinematic = true;
         manager.deleteFSM(FSM.getFSM());
     }
 
@@ -58,49 +39,26 @@ public class AI_FSM2 : MonoBehaviour
         addNoEvent();
     }
 
-    private void Defend()
-    {
-        var ballPositionY = ball.transform.position.y;
-        if (ballPositionY > transform.position.y)
-        {
-            transform.Translate((Vector2.up * m_Speed * Time.deltaTime));
-        }
-
-        if (ballPositionY < transform.position.y)
-        {
-            transform.Translate((Vector2.down * m_Speed * Time.deltaTime));
-        }
-    }
-
     private void DoNothing()
     {
         Debug.Log("Saving Energy");
     }
 
-    private void SpinToWin()
-    {
-        spinToWin = true;
-        transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
-    }
-
-    private void StopSpin()
-    {
-        spinToWin = false;
-        transform.rotation = initialRotation;
-    }
-
     public void ExecuteAction(int actionTag)
     {
-        Debug.Log($"Execute Action: {actionTag}");
         switch (actionTag)
         {
             case (int)Tags.ActionTags.DEFEND:
-                StopSpin();
-                Defend();
+                playerManagement.StopSpin();
+                playerManagement.Defend();
                 break;
 
             case (int)Tags.ActionTags.SPIN:
-                SpinToWin();
+                playerManagement.ActivateSpin();
+                break;
+
+            case (int)Tags.ActionTags.SUPERDEFEND:
+                playerManagement.SuperDefend();
                 break;
 
             default:
@@ -113,19 +71,21 @@ public class AI_FSM2 : MonoBehaviour
     {
         FSMevents.Clear();
 
-
-        Debug.Log($"Distance to Ball :{distanceToBall}");
-        Debug.Log($"ballFarAwayDistance :{ballFarAwayDistance}");
-        if (distanceToBall > ballFarAwayDistance)
+        if (playerManagement.BallNear() && playerManagement.isSuperDefend)
         {
-            int eventId = (int)Tags.EventTags.BALL_FAR_AWAY;
+            int actionId = (int)Tags.EventTags.SUPERDEFENDING_AVAILABLE;
+            FSMevents.Add(actionId);
+        }
+        else if (playerManagement.BallNear())
+        {
+            int eventId = (int)Tags.EventTags.BALL_NEAR;
             FSMevents.Add(eventId);
         }
         else
         {
-            int eventId = (int)Tags.EventTags.BALL_NEAR;
+            Debug.Log("Far Way");
+            int eventId = (int)Tags.EventTags.BALL_FAR_AWAY;
             FSMevents.Add(eventId);
-            Debug.Log($"BALL_NEAR Event added: {eventId}");
         }
 
         if (FSMevents.Count == 0)
@@ -141,12 +101,7 @@ public class AI_FSM2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("------- Update start -------- ");
-        Vector3 BallPosition = ball.transform.position;
-        distanceToBall = Mathf.Abs(transform.position.x - BallPosition.x);
-
-
-        m_Rigidbody.isKinematic = false;
+        Debug.Log("FSM 2 active ");
 
         FSMactions = FSM.Update();
         foreach (int action in FSMactions)
@@ -161,8 +116,5 @@ public class AI_FSM2 : MonoBehaviour
             ExecuteAction(FSMactions[i]);
             // }
         }
-
-        Debug.Log("------- Update end -------- ");
-        Debug.Log("FSM active ");
     }
 }

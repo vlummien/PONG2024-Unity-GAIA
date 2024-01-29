@@ -27,6 +27,13 @@
                 <S_outAction>NULL</S_outAction>
                 <S_Fsm></S_Fsm>
             </State>
+            <State Initial="NO">
+                <S_Name>COMING_CLOSER</S_Name>
+                <S_Action>COME_CLOSER</S_Action>
+                <S_inAction>COME_CLOSER</S_inAction>
+                <S_outAction>NULL</S_outAction>
+                <S_Fsm></S_Fsm>
+            </State>
         </States>
 
         <Transitions>
@@ -98,6 +105,68 @@
                 <Events>
                     <Event>
                         <ID>BALL_ABOVE_NPC</ID>
+                        <Type>BASIC</Type>
+                    </Event>
+                </Events>
+            </Transition>
+
+            <Transition>
+                <T_Name>MOVE_UP_TO_COMING_CLOSER</T_Name>
+                <T_Origin>MOVING_UP</T_Origin>
+                <T_Destination>COMING_CLOSER</T_Destination>
+                <T_Action>NULL</T_Action>
+                <Events>
+                    <Event>
+                        <ID>COMING_CLOSER_AVAILABLE</ID>
+                        <Type>BASIC</Type>
+                    </Event>
+                </Events>
+            </Transition>
+            <Transition>
+                <T_Name>MOVE_DOWN_TO_COMING_CLOSER</T_Name>
+                <T_Origin>MOVING_DOWN</T_Origin>
+                <T_Destination>COMING_CLOSER</T_Destination>
+                <T_Action>NULL</T_Action>
+                <Events>
+                    <Event>
+                        <ID>COMING_CLOSER_AVAILABLE</ID>
+                        <Type>BASIC</Type>
+                    </Event>
+                </Events>
+            </Transition>
+
+            <Transition>
+                <T_Name>COMING_CLOSER_TO_MOVE_UP</T_Name>
+                <T_Origin>COMING_CLOSER</T_Origin>
+                <T_Destination>MOVING_UP</T_Destination>
+                <T_Action>NULL</T_Action>
+                <Events>
+                    <Event>
+                        <ID>BALL_ABOVE_NPC</ID>
+                        <Type>BASIC</Type>
+                    </Event>
+                </Events>
+            </Transition>
+            <Transition>
+                <T_Name>COMING_CLOSER_TO_MOVE_DOWN</T_Name>
+                <T_Origin>COMING_CLOSER</T_Origin>
+                <T_Destination>MOVING_DOWN</T_Destination>
+                <T_Action>NULL</T_Action>
+                <Events>
+                    <Event>
+                        <ID>BALL_BELOW_NPC</ID>
+                        <Type>BASIC</Type>
+                    </Event>
+                </Events>
+            </Transition>
+            <Transition>
+                <T_Name>COMING_CLOSER_TO_NOT_MOVING</T_Name>
+                <T_Origin>COMING_CLOSER</T_Origin>
+                <T_Destination>NOT_MOVING</T_Destination>
+                <T_Action>NULL</T_Action>
+                <Events>
+                    <Event>
+                        <ID>BALL_FAR_AWAY</ID>
                         <Type>BASIC</Type>
                     </Event>
                 </Events>

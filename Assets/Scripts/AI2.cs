@@ -5,49 +5,28 @@ using UnityEngine;
 
 public class AI2 : MonoBehaviour
 {
-    public float speed = 3.3f;
-    public float ballFarAwayDistance = 4.5f;
-    public GameObject ball;
-    public float rotationSpeed = 1000f;
-    
-    private Quaternion initialRotation;
-    
-    private float distanceToBall; // Store the distance between the player and the ball.
+    private PlayerManagement playerManagement;
 
-    void Start()
+    private void Awake()
     {
-        // Store the initial rotation when the script starts
-        initialRotation = transform.rotation;
+        playerManagement = GetComponent<PlayerManagement>();
     }
 
     public void Update()
     {
-        
-        Vector3 BallPosition = ball.transform.position;
-        distanceToBall = Mathf.Abs(transform.position.x - BallPosition.x);
-        var moveDistance = speed * Time.deltaTime;
-        
+        Debug.Log("Source Code AI 2 active");
 
-        if (distanceToBall > ballFarAwayDistance)
+        if (playerManagement.BallNear() && playerManagement.isSuperDefend)
         {
-            // Spin to win
-            transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
+            playerManagement.SuperDefend();
+        }
+        else if (playerManagement.BallNear())
+        {
+            playerManagement.Defend();
         }
         else
         {
-            // Reset to the initial rotation
-            transform.rotation = initialRotation;
-            
-            // Move down/up
-            if (ball.transform.position.y > transform.position.y)
-            {
-                transform.Translate(Vector2.up * moveDistance);
-            }
-            else if (ball.transform.position.y < transform.position.y)
-            {
-                transform.Translate((Vector2.down * moveDistance));
-            }
+            playerManagement.ActivateSpin();
         }
-        Debug.Log("Source Code AI active");
     }
 }

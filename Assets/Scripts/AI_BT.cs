@@ -5,42 +5,30 @@ using UnityEngine;
 using UnityEngine.AI;
 using Panda;
 using GAIA;
-using Random = UnityEngine.Random;
 
 public class AI_BT : MonoBehaviour
 {
-    public float m_Speed = 3.3f;
-    public float ballFarAwayDistance = 4.5f;
+    private PlayerManagement playerManagement;
     public GameObject ball;
-
-    private float distanceToBall; // Store the distance between the player and the ball.
-    private Rigidbody2D m_Rigidbody; // Reference used to move the tank.
-
+    
     public string BTFileName; // Choose the BT to load by txt file name.
     private GAIA_Manager manager; // Instatiates the manager.
     
-    private Quaternion initialRotation;
 
 
     private void Awake()
     {
-        m_Rigidbody = GetComponent<Rigidbody2D>();
-        initialRotation = transform.rotation;
+        playerManagement = GetComponent<PlayerManagement>();
     }
 
 
     private void OnEnable()
     {
-        // When turned on, make sure it's not kinematic.
-        m_Rigidbody.isKinematic = false;
-        manager.changeTickOn(gameObject, BehaviourTree.UpdateOrder.Update);
-        transform.rotation = initialRotation;
+        manager?.changeTickOn(gameObject, BehaviourTree.UpdateOrder.Update);
     }
 
     private void OnDisable()
     {
-        // When turned off, set it to kinematic so it stops moving.
-        m_Rigidbody.isKinematic = true;
         manager.changeTickOn(gameObject, BehaviourTree.UpdateOrder.Manual);
     }
 
@@ -65,15 +53,19 @@ public class AI_BT : MonoBehaviour
     [Task]
     private void MoveUp()
     {
-        Debug.Log("BT AI: MoveUp");
-        transform.Translate((Vector2.up * m_Speed * Time.deltaTime));
+        playerManagement.MoveUp();
     }
 
     [Task]
     private void MoveDown()
     {
-        Debug.Log("BT AI: MoveDown");
-        transform.Translate((Vector2.down * m_Speed * Time.deltaTime));
+        playerManagement.MoveDown();
+    }
+
+    [Task]
+    private void ComeCloser()
+    {
+        playerManagement.ComingCloser();
     }
 
     [Task]
@@ -87,8 +79,7 @@ public class AI_BT : MonoBehaviour
     [Task]
     bool ballFar()
     {
-        Debug.Log(distanceToBall);
-        return distanceToBall > ballFarAwayDistance;
+        return !playerManagement.BallNear();
     }
 
     [Task]
@@ -104,15 +95,10 @@ public class AI_BT : MonoBehaviour
         return ball.transform.position.y < transform.position.y;
     }
 
-    // CONDITIONS END
-    
-
-    void LateUpdate()
+    [Task]
+    bool comeCloserAvailable()
     {
-        Vector3 BallPosition = ball.transform.position;
-        distanceToBall = Mathf.Abs(transform.position.x - BallPosition.x);
-
-
-        m_Rigidbody.isKinematic = false;
+        return !playerManagement.BallNear() && playerManagement.isComingCloser;
     }
+    
 }
