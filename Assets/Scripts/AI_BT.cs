@@ -46,6 +46,7 @@ public class AI_BT : MonoBehaviour
         Debug.Log("BT AI is active");
 #if (PANDA)
         // Update the Panda Behaviour Tree for checking new state
+        // Otherwise it is not checking the current state anymore
         manager.changeBT(gameObject, BTFileName);
 #endif
     }
