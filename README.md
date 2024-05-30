@@ -1,3 +1,3 @@
-# PONG 2022 Ultimate Unity Crazy AI Remake Edition
-First project in Unity, using C#
+# PONG 2024 Ultimate Unity Crazy AI Remake Edition
+
 Just download -> Build in Unity to play.
